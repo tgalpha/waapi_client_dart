@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:logger/logger.dart';
 import 'package:wamp_client/wamp_client.dart';
 import 'package:waapi_client_dart/src/uri.dart';
@@ -62,6 +64,14 @@ class WaapiClient {
       }
       return null;
     }
+  }
+
+  Future<Stream<Map?>> subscribe(
+    String uri, {
+    Map<String, dynamic> options = const {},
+  }) async {
+    final stream = await _client.subscribe(uri, options);
+    return stream.map((e) => e.args.params);
   }
 
   Future<Map?> getWwiseInfo() async {
