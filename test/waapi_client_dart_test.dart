@@ -3,14 +3,16 @@ import 'package:test/test.dart';
 
 void main() {
   group('A group of tests', () {
-    final awesome = Awesome();
+    final client = WaapiClient();
 
-    setUp(() {
+    setUp(() async {
       // Additional setup goes here.
+      await client.connect();
     });
 
-    test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
+    test('waapi function call', () async {
+      final res = await client.getWwiseInfo();
+      // expect();
     });
   });
 }
