@@ -1,6 +1,6 @@
 name: waapi_client_dart
 description: Wwise Authoring API (Waapi) Client for Dart. Provides waapi function calls and topic subscriptions.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/tgalpha/waapi_client_dart
 
 environment:
