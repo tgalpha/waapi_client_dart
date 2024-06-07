@@ -25,6 +25,9 @@ Future<void> waapiCalls(WaapiClient client) async {
         'path': ['\\Actor-Mixer Hierarchy\\Default Work Unit'],
       }
     },
+    options: {
+      'return': ['id', 'name', 'type', '@Inclusion'],
+    },
   );
   print('Object get: $object');
 }
@@ -32,7 +35,7 @@ Future<void> waapiCalls(WaapiClient client) async {
 Future<void> waapiSubscriptions(WaapiClient client) async {
   final objectDeleteStream = await client.subscribe(WaapiUri.ak_wwise_core_object_postdeleted);
   final objectDeleteSub = objectDeleteStream.listen((event) {
-    print('Object post deleted: $event');
+    print('Object deleted: $event');
   });
 
   final objectCreateStream = await client.subscribe(WaapiUri.ak_wwise_core_object_created);

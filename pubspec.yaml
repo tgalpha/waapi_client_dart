@@ -1,5 +1,5 @@
 name: waapi_client_dart
-description: A starting point for Dart libraries or applications.
+description: Wwise Authoring API (Waapi) Client for Dart.
 version: 1.0.0
 repository: https://github.com/tgalpha/waapi_client_dart
 
