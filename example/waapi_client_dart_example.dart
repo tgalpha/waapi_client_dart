@@ -30,10 +30,18 @@ Future<void> waapiCalls(WaapiClient client) async {
 }
 
 Future<void> waapiSubscriptions(WaapiClient client) async {
-  client.subscribe(WaapiUri.ak_wwise_core_object_created).then((stream) async {
-    await for (final event in stream) {
-      print('Object created: $event');
-    }
+  final objectDeleteStream = await client.subscribe(WaapiUri.ak_wwise_core_object_postdeleted);
+  final objectDeleteSub = objectDeleteStream.listen((event) {
+    print('Object post deleted: $event');
+  });
+
+  final objectCreateStream = await client.subscribe(WaapiUri.ak_wwise_core_object_created);
+  final objectCreateSub = objectCreateStream.listen((event) async {
+    print('Object created: $event');
+    await Future.delayed(const Duration(milliseconds: 200));
+    await client.call(WaapiUri.ak_wwise_core_object_delete, args: {
+      'object': event?['object']['id'],
+    });
   });
 
   await client.call(
@@ -45,6 +53,7 @@ Future<void> waapiSubscriptions(WaapiClient client) async {
       'onNameConflict': 'rename',
     },
   );
-
-  await Future.delayed(const Duration(milliseconds: 500));
+  await Future.delayed(const Duration(milliseconds: 300));
+  await objectDeleteSub.cancel();
+  await objectCreateSub.cancel();
 }
