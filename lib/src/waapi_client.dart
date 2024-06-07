@@ -8,6 +8,7 @@ class WaapiClient {
   final String url;
   final _client = WampClient('realm1');
   bool _connected = false;
+
   /// Allow errors on call and subscribe to throw an exception. Default is false.
   final bool _allowException;
   final Logger _logger;

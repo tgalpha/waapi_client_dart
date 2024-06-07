@@ -33,12 +33,14 @@ Future<void> waapiCalls(WaapiClient client) async {
 }
 
 Future<void> waapiSubscriptions(WaapiClient client) async {
-  final objectDeleteStream = await client.subscribe(WaapiUri.akWwiseCoreObjectPostDeleted);
+  final objectDeleteStream =
+      await client.subscribe(WaapiUri.akWwiseCoreObjectPostDeleted);
   final objectDeleteSub = objectDeleteStream.listen((event) {
     print('Object deleted: $event');
   });
 
-  final objectCreateStream = await client.subscribe(WaapiUri.akWwiseCoreObjectCreated);
+  final objectCreateStream =
+      await client.subscribe(WaapiUri.akWwiseCoreObjectCreated);
   final objectCreateSub = objectCreateStream.listen((event) async {
     print('Object created: $event');
     await Future.delayed(const Duration(milliseconds: 200));

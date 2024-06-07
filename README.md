@@ -20,7 +20,7 @@ void main() async {
     await client.connect();
 
     final object = await client.call(
-      WaapiUri.ak_wwise_core_object_get,
+      WaapiUri.akWwiseCoreObjectGet,
       args: {
         'from': {
           'path': ['\\Actor-Mixer Hierarchy\\Default Work Unit'],
@@ -46,22 +46,22 @@ void main() async {
   try {
     await client.connect();
 
-    final objectDeleteStream = await client.subscribe(WaapiUri.ak_wwise_core_object_postdeleted);
+    final objectDeleteStream = await client.subscribe(WaapiUri.akWwiseCoreObjectPostDeleted);
     final objectDeleteSub = objectDeleteStream.listen((event) {
       print('Object deleted: $event');
     });
 
-    final objectCreateStream = await client.subscribe(WaapiUri.ak_wwise_core_object_created);
+    final objectCreateStream = await client.subscribe(WaapiUri.akWwiseCoreObjectCreated);
     final objectCreateSub = objectCreateStream.listen((event) async {
       print('Object created: $event');
       await Future.delayed(const Duration(milliseconds: 200));
-      await client.call(WaapiUri.ak_wwise_core_object_delete, args: {
+      await client.call(WaapiUri.akWwiseCoreObjectDelete, args: {
         'object': event?['object']['id'],
       });
     });
 
     await client.call(
-      WaapiUri.ak_wwise_core_object_create,
+      WaapiUri.akWwiseCoreObjectCreate,
       args: {
         'parent': '\\Actor-Mixer Hierarchy\\Default Work Unit',
         'type': 'RandomSequenceContainer',
