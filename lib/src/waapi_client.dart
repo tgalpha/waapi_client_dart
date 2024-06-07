@@ -41,7 +41,7 @@ class WaapiClient {
     _client.connect(url);
 
     while (!isConnected()) {
-      await Future.delayed(Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 100));
     }
   }
 
@@ -75,12 +75,12 @@ class WaapiClient {
   }
 
   Future<Map?> getWwiseInfo() async {
-    return await call(WaapiUri.ak_wwise_core_getinfo);
+    return await call(WaapiUri.akWwiseCoreGetInfo);
   }
 
   Future<String?> queryProjectPath() async {
     final result = await call(
-      WaapiUri.ak_wwise_core_object_get,
+      WaapiUri.akWwiseCoreObjectGet,
       args: {
         "from": {
           "ofType": ["Project"]
