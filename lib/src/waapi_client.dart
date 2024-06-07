@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:logger/logger.dart';
 import 'package:wamp_client/wamp_client.dart';
-import 'package:waapi_client_dart/src/uri.dart';
 
 class WaapiClient {
   final String url;
@@ -73,29 +72,5 @@ class WaapiClient {
   }) async {
     final stream = await _client.subscribe(uri, options);
     return stream.map((e) => e.args.params);
-  }
-
-  Future<Map?> getWwiseInfo() async {
-    return await call(WaapiUri.akWwiseCoreGetInfo);
-  }
-
-  Future<String?> queryProjectPath() async {
-    final result = await call(
-      WaapiUri.akWwiseCoreObjectGet,
-      args: {
-        "from": {
-          "ofType": ["Project"]
-        }
-      },
-      options: {
-        "return": ["filePath"]
-      },
-    );
-
-    if (result == null || result['return'].isEmpty) {
-      return null;
-    }
-
-    return result['return'][0]['filePath'];
   }
 }
