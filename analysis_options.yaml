@@ -17,8 +17,11 @@ include: package:lints/recommended.yaml
 
 linter:
   rules:
+    avoid_print: false
+    prefer_single_quotes: true
     prefer_const_constructors : true
     constant_identifier_names: false
+    use_super_parameters: true
 
 # analyzer:
 #   exclude:

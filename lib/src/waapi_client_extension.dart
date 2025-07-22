@@ -9,12 +9,12 @@ extension WaapiClientExtension on WaapiClient {
     final result = await call(
       WaapiUri.akWwiseCoreObjectGet,
       args: {
-        "from": {
-          "ofType": ["Project"]
+        'from': {
+          'ofType': ['Project']
         }
       },
       options: {
-        "return": ["filePath"]
+        'return': ['filePath']
       },
     );
 
