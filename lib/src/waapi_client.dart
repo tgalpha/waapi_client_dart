@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
+import 'package:waapi_client_dart/waapi_client_dart.dart';
 import 'package:wamp_client/wamp_client.dart';
 
 class WaapiClient {
@@ -13,7 +14,7 @@ class WaapiClient {
   final Logger _logger;
 
   WaapiClient({
-    int port = 8080,
+    int port = kDefaultWaapiWampPort,
     String host = '127.0.0.1',
     bool allowException = false,
     Logger? logger,
@@ -49,6 +50,7 @@ class WaapiClient {
     await _client.close();
   }
 
+  ///  Do a Remote Procedure Call (RPC) to the Waapi server.
   Future<Map?> call(
     String uri, {
     Map<String, dynamic> args = const {},
@@ -66,6 +68,7 @@ class WaapiClient {
     }
   }
 
+  /// Subscribe to a topic on the Waapi server.
   Future<Stream<Map?>> subscribe(
     String uri, {
     Map<String, dynamic> options = const {},

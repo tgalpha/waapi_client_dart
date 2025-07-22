@@ -2,7 +2,7 @@ import 'package:waapi_client_dart/waapi_client_dart.dart';
 
 /// Arguments: <port>(optional)
 void main(List<String> args) async {
-  final client = WaapiClient(port: args.isNotEmpty ? int.parse(args[0]) : 8080);
+  final client = WaapiClient(port: args.isNotEmpty ? int.parse(args[0]) : findWaapiPort());
   try {
     await client.connect();
     await waapiCalls(client);

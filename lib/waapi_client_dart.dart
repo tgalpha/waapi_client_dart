@@ -6,3 +6,5 @@ library waapi_client_dart;
 export 'src/waapi_client.dart';
 export 'src/waapi_client_extension.dart';
 export 'src/uri.dart';
+export 'src/wwise_types.dart';
+export 'src/util.dart';
